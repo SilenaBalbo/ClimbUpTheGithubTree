@@ -3,13 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <title>ClimbUpTheGithubTree</title>
-    
-    
-    <p>Start!</p>
 
-    <p>Yo again</p>
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
 </head>
 <body>
     
+
+	<p>Hi</p>
+	<div id="firstTable">
+		<p>{{test}}</p>
+
+		<table>
+			<thead>
+				<tr>
+					<th>Nickname</th>
+					<th>Full name</th>
+					<th>Photo</th>
+					<th>User / Follow</th>
+					<th>User / Followed by</th>
+					<th>User / Post no</th>
+				</tr>
+			</thead>
+			<tbody>
+<!-- 				<tr>
+					<td>User / Biograohy</td>
+					<td v-for="item in mainArray">
+						{{item.graphql.user.biography}}
+					</td>
+				</tr> -->
+				<tr  v-for="item in mainArray">
+					<td>
+						{{item.graphql.user.username}} / {{item.logging_page_id}}
+					</td>
+					<td>
+						{{item.graphql.user.full_name}}
+					</td>
+					<td>
+						<img :src="item.graphql.user.profile_pic_url">
+					</td>
+					<td>
+						{{item.graphql.user.edge_follow.count}}
+					</td>
+					<td>
+						{{item.graphql.user.edge_followed_by.count}}
+					</td>
+					<td>
+						{{item.graphql.user.edge_owner_to_timeline_media.count}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<p>First posts from every person</p>
+
+		<table>
+			<tr>
+				<td>Name</td>
+				<td>First photo</td>
+				<td>No of likes</td>
+			</tr>			
+			<tr v-for="item in mainArray">
+				<td>{{item.graphql.user.full_name}}</td>
+				<td> <img :src="item.graphql.user.edge_owner_to_timeline_media.edges[0].node.display_url"></td>
+				<td>{{item.graphql.user.edge_owner_to_timeline_media.edges[0].node.edge_liked_by.count}}</td>
+			</tr>
+		</table>
+
+		<p>List of posts from first person</p>
+
+		<div class="posts">
+			<div v-for="item in onePerson" class="card">
+				<div>
+					<img :src="item.node.display_url">
+					<p>Text: {{item.node.edge_media_to_caption.edges[0].node.text}}</p>
+					<p>Liked by: {{item.node.edge_liked_by.count}}</p>
+					<p>No of comments: {{item.node.edge_media_to_comment.count}}</p>
+				</div>
+			</div>
+		</div>
+	
+	</div>
+
+<!-- profiles -->
+	<script src="scripts/raul.js"></script>
+	<script src="scripts/dataData.js"></script>
+	<script src="scripts/id3582115.js"></script>
+	<script src="scripts/id723531113.js"></script>
+	<script src="scripts/id261998995.js"></script>
+	<script src="scripts/id362405136.js"></script>
+	<script src="scripts/id34026859.js"></script>
+	<script src="scripts/id1735458172.js"></script>
+	<script src="scripts/id174618945.js"></script>
+	<script src="scripts/id44222792.js"></script>
+	<script src="scripts/id6281714.js"></script>
+	<script src="scripts/id6459664.js"></script>
+
+<!-- main script -->
+	<script src="scripts/main.js"></script>
+
 </body>
 </html>
