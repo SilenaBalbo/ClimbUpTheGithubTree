@@ -1,9 +1,4 @@
 
-	// console.log('dataRaul:');
-	// console.log(dataRaul);
-	// console.log('id3582115:');
-	// console.log(id3582115);
-
 	let profilesFromFile = ramdomProfiles;
 	let randNoArray = [];
 	let urlsArray = [];
@@ -52,6 +47,7 @@
 			test: 'Hello People',
 			mainArray: mainData,
 			onePerson: mainData[0].edge_owner_to_timeline_media.edges,
+			personsPosts: [],
 			keyword: '',
 			chartAvg: [],
 			chartFollowedByAll: [],
@@ -61,8 +57,16 @@
 		created: function(){
 			this.avgLikePerPost();
 			this.noOfLikesPlus();
+			this.createPersonsPostsArray();
 		},
 		methods: {
+			createPersonsPostsArray: function(){
+				// console.log('in createPersonsPostsArray: ');
+				for(let i = 0; i < this.mainArray.length; i ++){
+					this.personsPosts.push(this.mainArray[i].edge_owner_to_timeline_media.edges);
+				}
+				// console.log(this.personsPosts);
+			},
 			avgLikePerPost: function(){
 				console.log('in avgLikePerPost');
 

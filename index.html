@@ -79,13 +79,39 @@
 			</tr>
 		</table>
 
-		<p>3. List of posts from first person</p>
+		<p>3.0 List of posts from first person</p>
 
 		<div class="posts">
-			<div v-for="item in onePerson" class="card">
+			<div v-for="item in personsPosts[0]" class="card">
 				<div>
 					<img :src="item.node.display_url">
-					<p>Text: {{item.node.edge_media_to_caption.edges[0].node.text}}</p>
+					<!-- <p>Text: {{item.node.edge_media_to_caption.edges[0].node.text}}</p> -->
+					<p>Liked by: {{item.node.edge_liked_by.count}}</p>
+					<p>No of comments: {{item.node.edge_media_to_comment.count}}</p>
+				</div>
+			</div>
+		</div>
+
+		<p>3.1 List of posts from first person</p>
+
+		<div class="posts">
+			<div v-for="item in personsPosts[1]" class="card">
+				<div>
+					<img :src="item.node.display_url">
+					<!-- <p>Text: {{item.node.edge_media_to_caption.edges[0].node.text}}</p> -->
+					<p>Liked by: {{item.node.edge_liked_by.count}}</p>
+					<p>No of comments: {{item.node.edge_media_to_comment.count}}</p>
+				</div>
+			</div>
+		</div>
+
+		<p>3.2 List of posts from first person</p>
+
+		<div class="posts">
+			<div v-for="item in personsPosts[2]" class="card">
+				<div>
+					<img :src="item.node.display_url">
+					<!-- <p>Text: {{item.node.edge_media_to_caption.edges[0].node.text}}</p> -->
 					<p>Liked by: {{item.node.edge_liked_by.count}}</p>
 					<p>No of comments: {{item.node.edge_media_to_comment.count}}</p>
 				</div>
