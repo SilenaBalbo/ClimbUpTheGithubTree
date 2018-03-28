@@ -6,10 +6,17 @@
 
     <link rel="stylesheet" type="text/css" href="css/custom.css">
 
+    <!-- js & jquery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+    <!-- vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <!-- chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+    <script src="https://unpkg.com/chartkick@2.3.3"></script>
+    <script src="https://unpkg.com/vue-chartkick@0.2.1/dist/vue-chartkick.js"></script>
 
 </head>
 <body>
@@ -18,9 +25,12 @@
     
 
 	<p>Hi</p>
-	<div id="firstTable">
-		<p>{{test}}</p>
+	<div id="app">
 
+		<p>0. Searchbar</p>
+		<input v-model='keyword' v-on:keyup.enter='compareProfile' type="text" name="Search" placeholder="Type profile name to compare and press enter">
+
+		<p>1. Main Table</p>
 		<table>
 			<thead>
 				<tr>
@@ -33,51 +43,45 @@
 				</tr>
 			</thead>
 			<tbody>
-<!-- 				<tr>
-					<td>User / Biograohy</td>
-					<td v-for="item in mainArray">
-						{{item.graphql.user.biography}}
-					</td>
-				</tr> -->
-				<tr  v-for="item in mainArray">
+				<tr v-for="item in mainArray">
 					<td>
-						{{item.graphql.user.username}} / {{item.logging_page_id}}
+						{{item.username}}
 					</td>
 					<td>
-						{{item.graphql.user.full_name}}
+						{{item.full_name}}
 					</td>
 					<td>
-						<img :src="item.graphql.user.profile_pic_url">
+						<img :src="item.profile_pic_url">
 					</td>
 					<td>
-						{{item.graphql.user.edge_follow.count}}
+						{{item.edge_follow.count}}
 					</td>
 					<td>
-						{{item.graphql.user.edge_followed_by.count}}
+						{{item.edge_followed_by.count}}
 					</td>
 					<td>
-						{{item.graphql.user.edge_owner_to_timeline_media.count}}
+						{{item.edge_owner_to_timeline_media.count}}
 					</td>
 				</tr>
 			</tbody>
 		</table>
 
-		<p>First posts from every person</p>
+		<p>2. First posts from every person</p>
 
 		<table>
 			<tr>
 				<td>Name</td>
-				<td>First photo</td>
+				<!-- <td>First photo</td> -->
 				<td>No of likes</td>
 			</tr>			
 			<tr v-for="item in mainArray">
-				<td>{{item.graphql.user.full_name}}</td>
-				<td> <img :src="item.graphql.user.edge_owner_to_timeline_media.edges[0].node.display_url"></td>
-				<td>{{item.graphql.user.edge_owner_to_timeline_media.edges[0].node.edge_liked_by.count}}</td>
+				<td>{{item.full_name}}</td>
+				<!-- <td> <img :src="item.edge_owner_to_timeline_media.edges[0].node.display_url"></td> -->
+				<td>{{item.edge_owner_to_timeline_media.edges[0].node.edge_liked_by.count}}</td>
 			</tr>
 		</table>
 
-		<p>List of posts from first person</p>
+		<p>3. List of posts from first person</p>
 
 		<div class="posts">
 			<div v-for="item in onePerson" class="card">
@@ -89,22 +93,29 @@
 				</div>
 			</div>
 		</div>
-	
+
+		<p>4. Chart avg likes per post for every person</p>
+
+		<div>
+			<pie-chart :data="chartAvg" :donut="true" label="Average no of likes per post"></pie-chart>
+		</div>
+
+		<p>5. Chart followedby</p>
+
+		<div>
+			<bar-chart :data="chartFollowedByAll" xtitle="Follow by ..."></bar-chart>
+		</div>
+
+		<p>6. Chart likes in posts</p>
+
+		<div>
+			<line-chart :data="chartLikesInPosts" height="650px" xtitle="No of likes for last 12 posts"></line-chart>
+		</div>
+
 	</div>
 
-<!-- profiles -->
-	<script src="scripts/raul.js"></script>
-	<script src="scripts/dataData.js"></script>
-	<script src="scripts/id3582115.js"></script>
-	<script src="scripts/id723531113.js"></script>
-	<script src="scripts/id261998995.js"></script>
-	<script src="scripts/id362405136.js"></script>
-	<script src="scripts/id34026859.js"></script>
-	<script src="scripts/id1735458172.js"></script>
-	<script src="scripts/id174618945.js"></script>
-	<script src="scripts/id44222792.js"></script>
-	<script src="scripts/id6281714.js"></script>
-	<script src="scripts/id6459664.js"></script>
+<!-- random pofile -->
+	<script src="scripts/t100instaProf.js"></script>
 
 <!-- main script -->
 	<script src="scripts/main.js"></script>
