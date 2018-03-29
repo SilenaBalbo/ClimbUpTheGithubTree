@@ -62,8 +62,13 @@
 		methods: {
 			createPersonsPostsArray: function(){
 				// console.log('in createPersonsPostsArray: ');
-				for(let i = 0; i < this.mainArray.length; i ++){
-					this.personsPosts.push(this.mainArray[i].edge_owner_to_timeline_media.edges);
+				console.log(this.personsPosts.length);
+				if (this.personsPosts.length > 0){
+					this.personsPosts[0] = this.mainArray[0].edge_owner_to_timeline_media.edges;
+				} else {
+					for(let i = 0; i < this.mainArray.length; i ++){
+						this.personsPosts.push(this.mainArray[i].edge_owner_to_timeline_media.edges);
+					}
 				}
 				// console.log(this.personsPosts);
 			},
@@ -151,6 +156,7 @@
 
 
 			},
+			//marszalek.kowalewska
 			compareProfile: function(){
 				console.log('in compareProfile');
 				console.log(this.keyword);
@@ -160,6 +166,7 @@
 					vueElement.mainArray[0] = myProfile.graphql.user;
 					vueElement.avgLikePerPost();
 					vueElement.noOfLikesPlus();
+					vueElement.createPersonsPostsArray();
 				})
 			}
 		}
