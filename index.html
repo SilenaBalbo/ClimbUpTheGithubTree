@@ -60,7 +60,7 @@
 						{{item.edge_followed_by.count}}
 					</td>
 					<td>
-						{{item.edge_owner_to_timeline_media.count}}
+						<button v-on:click="showPostsElement(item.id)"></button>
 					</td>
 				</tr>
 			</tbody>
@@ -83,16 +83,30 @@
 
 		<p>3.0 List of posts from first person</p>
 
-		<div class="posts">
+
+      <div v-if="showPosts">
+	      <div class="d-flex flex-row flex-wrap justify-content-center">
+	      	<div v-for="item in onePerson">
+						<div class="posts d-flex flex-column justify-content-center">
+							<img :src="item.node.display_url">
+							<p class="text-center">No of likes: {{item.node.edge_liked_by.count}}</p>
+							<p>No of comments: {{item.node.edge_media_to_comment.count}}</p>
+						</div>
+					</div>
+				</div>
+      </div>
+
+
+<!-- 		<div class="posts">
 			<div v-for="item in personsPosts[0]" class="card">
 				<div>
 					<img :src="item.node.display_url">
-					<!-- <p>Text: {{item.node.edge_media_to_caption.edges[0].node.text}}</p> -->
+					<p>Text: {{item.node.edge_media_to_caption.edges[0].node.text}}</p>
 					<p>Liked by: {{item.node.edge_liked_by.count}}</p>
 					<p>No of comments: {{item.node.edge_media_to_comment.count}}</p>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<p>3.1 List of posts from first person</p>
 

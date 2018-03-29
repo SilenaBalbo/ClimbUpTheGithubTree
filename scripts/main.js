@@ -51,7 +51,8 @@
 			keyword: '',
 			chartAvg: [],
 			chartFollowedByAll: [],
-			chartLikesInPosts: []
+			chartLikesInPosts: [],
+			showPosts: false
 
 		},
 		created: function(){
@@ -168,7 +169,19 @@
 					vueElement.noOfLikesPlus();
 					vueElement.createPersonsPostsArray();
 				})
-			}
+			},
+			showPostsElement: function(id){
+				console.log('in showPostsElement');
+				console.log(id);
+
+				this.mainArray.forEach((profile) => {
+					if(profile.id == id){
+						this.onePerson = profile.edge_owner_to_timeline_media.edges;
+					}
+				})
+				this.showPosts = true;
+				console.log(this.onePerson);
+			}	
 		}
 	})
 
